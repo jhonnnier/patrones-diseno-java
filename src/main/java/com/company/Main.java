@@ -22,7 +22,21 @@ public class Main {
         //factoryMethodTest();
         //abstractFactoryMethodTest();
         //builderTest();
-        prototypeTest();
+        //prototypeTest();
+        singletonTest();
+    }
+
+    private static void singletonTest() {
+        com.company.creational.singleton.Card.getInstance().setCardNumber("123-456-789");
+        System.out.println(com.company.creational.singleton.Card.getInstance().getCardNumber());
+        
+        /*
+        Ventajas
+        - Acceso controlado a dicha clase
+        
+        Desventaja
+        - dificil de testear ya que guarda la misma referencia y en el test no podemos apuntar a esa referencia
+         */
     }
 
     private static void prototypeTest() {
@@ -38,7 +52,7 @@ public class Main {
             - Clonar es más facil que volverlo a crear
              */
 
-        }catch (CloneNotSupportedException e){
+        } catch (CloneNotSupportedException e) {
             e.printStackTrace();
         }
     }
