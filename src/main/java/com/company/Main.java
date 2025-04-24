@@ -8,11 +8,65 @@ import com.company.creational.abstractFactory.PaymentMethod;
 import com.company.creational.factoryMethod.Payment;
 import com.company.creational.factoryMethod.PaymentFactory;
 import com.company.creational.factoryMethod.PaymentType;
+import com.company.creational.prototype.PrototypeCard;
+import com.company.creational.prototype.PrototypeFactory;
+
+import static com.company.creational.prototype.PrototypeFactory.CartType.AMEX;
+import static com.company.creational.prototype.PrototypeFactory.CartType.VISA;
+
 
 public class Main {
     public static void main(String[] args) {
-//        factoryMethodTest();
-        abstractFactoryMethodTest();
+
+        //CREACIONALES
+        //factoryMethodTest();
+        //abstractFactoryMethodTest();
+        //builderTest();
+        prototypeTest();
+    }
+
+    private static void prototypeTest() {
+        PrototypeFactory.loadCard();
+        try {
+            PrototypeCard visa = PrototypeFactory.getInstance(VISA);
+            visa.getCard();
+
+            PrototypeCard amex = PrototypeFactory.getInstance(AMEX);
+            amex.getCard();
+            
+            /*
+            - Clonar es más facil que volverlo a crear
+             */
+
+        }catch (CloneNotSupportedException e){
+            e.printStackTrace();
+        }
+    }
+
+    private static void builderTest() {
+        com.company.creational.builder.Card card = new com.company.creational.builder.Card.CardBuilder(
+                "VISA",
+                "0000 1111 2222 3333")
+                .name("Alberto")
+                .expires(2030)
+                .credit(true)
+                .build();
+
+        System.out.println(card.toString());
+
+        com.company.creational.builder.Card card2 = new com.company.creational.builder.Card.CardBuilder(
+                "AMEX",
+                "9999 9999 9999 9999")
+                .build();
+
+        System.out.println(card2.toString());
+        
+        /*
+        - Reduce el acoplamiento (Bajo acoplamiento).
+        - El código de construcción es independiente del de representación, las clases concretas que tratan la representación
+        son internas (no forman parte de la interfaz builder).
+        - Nos da mayor control en la creación de objetos, lo podemos configurar tal como lo necesitamos
+         */
     }
 
     private static void abstractFactoryMethodTest() {
