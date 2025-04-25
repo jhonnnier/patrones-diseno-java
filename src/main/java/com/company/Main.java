@@ -2,6 +2,10 @@ package com.company;
 
 
 import com.company.behavioral.chainOfResponsability.Tarjeta;
+import com.company.behavioral.command.CreditCard;
+import com.company.behavioral.command.CreditCardActivateCommand;
+import com.company.behavioral.command.CreditCardDesactivateCommand;
+import com.company.behavioral.command.CreditCardInvoker;
 import com.company.creational.abstractFactory.AbstractFactory;
 import com.company.creational.abstractFactory.Card;
 import com.company.creational.abstractFactory.FactoryProvider;
@@ -27,17 +31,32 @@ import static com.company.creational.prototype.PrototypeFactory.CartType.VISA;
 public class Main {
     public static void main(String[] args) {
 
-        //CREACIONALES
-        //factoryMethodTest();
-        //factoryMethodEjm2Test();
+//        CREACIONALES
+//        factoryMethodTest();
+//        factoryMethodEjm2Test();
 //        factoryMethodEjm3Test();
-        //abstractFactoryMethodTest();
-        //builderTest();
-        //prototypeTest();
-        //singletonTest();
+//        abstractFactoryMethodTest();
+//        builderTest();
+//        prototypeTest();
+//        singletonTest();
         
-        //Comportamiento
-        chainOfREsponsability();
+//        Comportamiento
+//        chainOfREsponsability();
+        commandTest();
+    }
+
+    private static void commandTest() {
+        CreditCard creditCard = new CreditCard();
+        CreditCard creditCardDeactivate= new CreditCard();
+
+        CreditCardInvoker invoker = new CreditCardInvoker();
+
+        invoker.setCommand(new CreditCardActivateCommand(creditCard));
+        invoker.run();
+        System.out.println("--------------------");
+        invoker.setCommand(new CreditCardDesactivateCommand(creditCardDeactivate));
+        invoker.run();
+        
     }
 
     private static void chainOfREsponsability() {
