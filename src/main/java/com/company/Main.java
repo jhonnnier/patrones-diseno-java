@@ -1,6 +1,7 @@
 package com.company;
 
 
+import com.company.behavioral.chainOfResponsability.Tarjeta;
 import com.company.creational.abstractFactory.AbstractFactory;
 import com.company.creational.abstractFactory.Card;
 import com.company.creational.abstractFactory.FactoryProvider;
@@ -8,8 +9,16 @@ import com.company.creational.abstractFactory.PaymentMethod;
 import com.company.creational.factoryMethod.Payment;
 import com.company.creational.factoryMethod.PaymentFactory;
 import com.company.creational.factoryMethod.PaymentType;
+import com.company.creational.factoryMethodEjm2.DialogEjm2;
+import com.company.creational.factoryMethodEjm2.DialogEjm2Linux;
+import com.company.creational.factoryMethodEjm2.DialogEjm2Windows;
+import com.company.creational.factoryMethodEjm3.ButtonEjm3;
+import com.company.creational.factoryMethodEjm3.OperativeSystemFactory;
+import com.company.creational.factoryMethodEjm3.OperativeSystemType;
 import com.company.creational.prototype.PrototypeCard;
 import com.company.creational.prototype.PrototypeFactory;
+
+import java.util.Objects;
 
 import static com.company.creational.prototype.PrototypeFactory.CartType.AMEX;
 import static com.company.creational.prototype.PrototypeFactory.CartType.VISA;
@@ -20,10 +29,25 @@ public class Main {
 
         //CREACIONALES
         //factoryMethodTest();
+        //factoryMethodEjm2Test();
+//        factoryMethodEjm3Test();
         //abstractFactoryMethodTest();
         //builderTest();
         //prototypeTest();
-        singletonTest();
+        //singletonTest();
+        
+        //Comportamiento
+        chainOfREsponsability();
+    }
+
+    private static void chainOfREsponsability() {
+        Tarjeta tarjeta = new Tarjeta();
+        // Se puede utilizar el patron factory para crear la tarjeta
+        tarjeta.crediCardRequest(60000);
+        
+        /*
+        Tedioso para debuguear
+         */
     }
 
     private static void singletonTest() {
@@ -113,7 +137,36 @@ public class Main {
          */
     }
 
+    private static void factoryMethodEjm3Test() {
+        ButtonEjm3 button = null;
+        String os = System.getProperty("os.name").toLowerCase();
+        if (os.contains(OperativeSystemType.WINDOWS.getCodigo())) {
+            button = OperativeSystemFactory.getButtonEjm3(OperativeSystemType.WINDOWS);
+        } else if (os.contains(OperativeSystemType.LINUX.getCodigo())) {
+            button = OperativeSystemFactory.getButtonEjm3(OperativeSystemType.LINUX);
+        }
+
+        if (Objects.nonNull(button)) {
+            button.render();
+        }
+    }
+
+    private static void factoryMethodEjm2Test() {
+        DialogEjm2 dialogEjm2;
+
+//        String os = System.getProperty("os.name").toLowerCase();
+        String os = "win";
+        if (os.contains("win")) {
+            dialogEjm2 = new DialogEjm2Windows();
+        } else {
+            dialogEjm2 = new DialogEjm2Linux();
+        }
+
+        dialogEjm2.renderWindow(); // Usamos el patrón sin saber la clase concreta del botón
+    }
+
     public static void factoryMethodTest() {
+
         Payment cardPayment = PaymentFactory.getPayment(PaymentType.CARD_PAYMENT);
         cardPayment.doPayment();
 
