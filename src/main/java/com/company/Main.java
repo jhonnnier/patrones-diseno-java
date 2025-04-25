@@ -46,12 +46,11 @@ public class Main {
     }
 
     private static void commandTest() {
-        CreditCard creditCard = new CreditCard();
+        CreditCard creditCardActivate = new CreditCard();
         CreditCard creditCardDeactivate= new CreditCard();
-
         CreditCardInvoker invoker = new CreditCardInvoker();
 
-        invoker.setCommand(new CreditCardActivateCommand(creditCard));
+        invoker.setCommand(new CreditCardActivateCommand(creditCardActivate));
         invoker.run();
         System.out.println("--------------------");
         invoker.setCommand(new CreditCardDesactivateCommand(creditCardDeactivate));
