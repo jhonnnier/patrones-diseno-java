@@ -2,6 +2,7 @@ package com.company;
 
 
 import com.company.behavioral.chainOfResponsability.Tarjeta;
+import com.company.behavioral.commad.RNIs.ProceduresRNI001Impl;
 import com.company.behavioral.command.CreditCard;
 import com.company.behavioral.command.CreditCardActivateCommand;
 import com.company.behavioral.command.CreditCardDesactivateCommand;
@@ -42,7 +43,8 @@ public class Main {
         
 //        Comportamiento
 //        chainOfREsponsability();
-        commandTest();
+//        commandTest();
+        commandTest2();
     }
 
     private static void commandTest() {
@@ -56,6 +58,12 @@ public class Main {
         invoker.setCommand(new CreditCardDesactivateCommand(creditCardDeactivate));
         invoker.run();
         
+    }
+
+    private static void commandTest2() {
+        ProceduresRNI001Impl proceduresRNI001Impl = new ProceduresRNI001Impl();
+        boolean res =  proceduresRNI001Impl.execute(2L);
+        System.out.println("-------------------- " + res);
     }
 
     private static void chainOfREsponsability() {
