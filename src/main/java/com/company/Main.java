@@ -7,6 +7,9 @@ import com.company.behavioral.command.CreditCard;
 import com.company.behavioral.command.CreditCardActivateCommand;
 import com.company.behavioral.command.CreditCardDesactivateCommand;
 import com.company.behavioral.command.CreditCardInvoker;
+import com.company.behavioral.iterator.CardList;
+import com.company.behavioral.iterator.Iterator;
+import com.company.behavioral.iterator.List;
 import com.company.creational.abstractFactory.AbstractFactory;
 import com.company.creational.abstractFactory.Card;
 import com.company.creational.abstractFactory.FactoryProvider;
@@ -44,7 +47,25 @@ public class Main {
 //        Comportamiento
 //        chainOfREsponsability();
 //        commandTest();
-        commandTest2();
+//        commandTest2();
+        iteratorTest();
+    }
+
+    private static void iteratorTest() {
+        com.company.behavioral.iterator.Card[] cards = new com.company.behavioral.iterator.Card[5];
+        cards[0] = new com.company.behavioral.iterator.Card("VISA");
+        cards[1] = new com.company.behavioral.iterator.Card("AMEX");
+        cards[2] = new com.company.behavioral.iterator.Card("MASTER CARD");
+        cards[3] = new com.company.behavioral.iterator.Card("GOOGLE CARD");
+        cards[4] = new com.company.behavioral.iterator.Card("APPLE CARD");
+
+        List lista = new CardList(cards);
+        Iterator iterator = lista.iterator();
+        
+        while (iterator.hasNext()) {
+            com.company.behavioral.iterator.Card card = (com.company.behavioral.iterator.Card)iterator.next();
+            System.out.println(card.getType());
+        }
     }
 
     private static void commandTest() {
