@@ -15,6 +15,10 @@ import com.company.behavioral.mediator.ConcreteCollege2;
 import com.company.behavioral.mediator.ConcreteMediator;
 import com.company.behavioral.memento.Article;
 import com.company.behavioral.memento.Carateker;
+import com.company.behavioral.observer.Coche;
+import com.company.behavioral.observer.MessagePublisher;
+import com.company.behavioral.observer.Peaton;
+import com.company.behavioral.observer.Semaforo;
 import com.company.creational.abstractFactory.AbstractFactory;
 import com.company.creational.abstractFactory.Card;
 import com.company.creational.abstractFactory.FactoryProvider;
@@ -55,7 +59,29 @@ public class Main {
 //        commandTest2();
 //        iteratorTest();
 //        mediator();
-        memento();
+//        memento();
+        observer();
+    }
+
+    private static void observer() {
+        Coche coche = new Coche();
+        Peaton peaton = new Peaton();
+        MessagePublisher messagePublisher = new MessagePublisher();
+        
+        messagePublisher.attach(coche);
+        messagePublisher.attach(peaton);
+        messagePublisher.notifyUpdate(new Semaforo("ROJO_COCHE"));
+
+        try {
+            Thread.sleep(2000);
+        }catch (InterruptedException e){
+            
+        }
+
+        System.out.println("------------------------------");
+
+        messagePublisher.notifyUpdate(new Semaforo("VERDE_COCHE"));
+        
     }
 
     private static void memento() {
