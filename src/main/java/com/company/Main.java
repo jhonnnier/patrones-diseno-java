@@ -10,6 +10,11 @@ import com.company.behavioral.command.CreditCardInvoker;
 import com.company.behavioral.iterator.CardList;
 import com.company.behavioral.iterator.Iterator;
 import com.company.behavioral.iterator.List;
+import com.company.behavioral.mediator.ConcreteCollege1;
+import com.company.behavioral.mediator.ConcreteCollege2;
+import com.company.behavioral.mediator.ConcreteMediator;
+import com.company.behavioral.memento.Article;
+import com.company.behavioral.memento.Carateker;
 import com.company.creational.abstractFactory.AbstractFactory;
 import com.company.creational.abstractFactory.Card;
 import com.company.creational.abstractFactory.FactoryProvider;
@@ -43,12 +48,34 @@ public class Main {
 //        builderTest();
 //        prototypeTest();
 //        singletonTest();
-        
+
 //        Comportamiento
 //        chainOfREsponsability();
 //        commandTest();
 //        commandTest2();
-        iteratorTest();
+//        iteratorTest();
+//        mediator();
+        memento();
+    }
+
+    private static void memento() {
+        Carateker carateker = new Carateker();
+        Article article = new Article("Autor","Memento es una pelicula");
+        article.setText(article.getText() + " de Nolan");
+        System.out.println(article.getText());
+        carateker.addMemento(article.createMemento());
+    }
+
+    private static void mediator() {
+        ConcreteMediator mediator = new ConcreteMediator();
+        ConcreteCollege1 user1 = new ConcreteCollege1(mediator);
+        ConcreteCollege2 user2 = new ConcreteCollege2(mediator);
+
+        mediator.setUser1(user1);
+        mediator.setUser2(user2);
+        
+        user1.send("Hola Soy User1");
+        user2.send("Hola User1, soy User2");
     }
 
     private static void iteratorTest() {
@@ -61,16 +88,16 @@ public class Main {
 
         List lista = new CardList(cards);
         Iterator iterator = lista.iterator();
-        
+
         while (iterator.hasNext()) {
-            com.company.behavioral.iterator.Card card = (com.company.behavioral.iterator.Card)iterator.next();
+            com.company.behavioral.iterator.Card card = (com.company.behavioral.iterator.Card) iterator.next();
             System.out.println(card.getType());
         }
     }
 
     private static void commandTest() {
         CreditCard creditCardActivate = new CreditCard();
-        CreditCard creditCardDeactivate= new CreditCard();
+        CreditCard creditCardDeactivate = new CreditCard();
         CreditCardInvoker invoker = new CreditCardInvoker();
 
         invoker.setCommand(new CreditCardActivateCommand(creditCardActivate));
@@ -78,12 +105,12 @@ public class Main {
         System.out.println("--------------------");
         invoker.setCommand(new CreditCardDesactivateCommand(creditCardDeactivate));
         invoker.run();
-        
+
     }
 
     private static void commandTest2() {
         ProceduresRNI001Impl proceduresRNI001Impl = new ProceduresRNI001Impl();
-        boolean res =  proceduresRNI001Impl.execute(2L);
+        boolean res = proceduresRNI001Impl.execute(2L);
         System.out.println("-------------------- " + res);
     }
 
