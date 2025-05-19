@@ -32,6 +32,7 @@ import com.company.behavioral.strategy.LowerStrategyTestFormatter;
 import com.company.behavioral.templateMethod.AMex;
 import com.company.behavioral.templateMethod.Paypal;
 import com.company.behavioral.templateMethod.Visa;
+import com.company.behavioral.visitor.*;
 import com.company.creational.abstractFactory.AbstractFactory;
 import com.company.creational.abstractFactory.Card;
 import com.company.creational.abstractFactory.FactoryProvider;
@@ -77,7 +78,16 @@ public class Main {
 //          state();
 //        interpreter();
 //        strategy();
-        tempateMethod();
+//        tempateMethod();
+        visitor();
+    }
+
+    private static void visitor() {
+        OfertaElement ofertaElement = new OfertaGasolina();
+        ofertaElement.accept(new BlankCreditCardVisitor());
+
+        ofertaElement = new OfertaVuelos();
+        ofertaElement.accept(new ClassicCreditCardVisitor());
     }
 
     private static void tempateMethod() {
