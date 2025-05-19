@@ -76,7 +76,19 @@ public class Main {
 //        observer();
 //          state();
 //        interpreter();
-        strategy();
+//        strategy();
+        tempateMethod();
+    }
+
+    private static void tempateMethod() {
+        com.company.behavioral.templateMethod.Payment payment = new Visa();
+        payment.makePayment();
+
+        payment = new AMex();
+        payment.makePayment();
+
+        payment = new Paypal();
+        payment.makePayment();
     }
 
     private static void strategy() {
