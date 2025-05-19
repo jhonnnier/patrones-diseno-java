@@ -7,6 +7,10 @@ import com.company.behavioral.command.CreditCard;
 import com.company.behavioral.command.CreditCardActivateCommand;
 import com.company.behavioral.command.CreditCardDesactivateCommand;
 import com.company.behavioral.command.CreditCardInvoker;
+import com.company.behavioral.interpreter.AndExpresion;
+import com.company.behavioral.interpreter.Expresion;
+import com.company.behavioral.interpreter.OrExpresion;
+import com.company.behavioral.interpreter.TerminalExpresion;
 import com.company.behavioral.iterator.CardList;
 import com.company.behavioral.iterator.Iterator;
 import com.company.behavioral.iterator.List;
@@ -64,19 +68,35 @@ public class Main {
 //        mediator();
 //        memento();
 //        observer();
-          state();
+//          state();
+        interpreter();
+    }
+
+    private static void interpreter() {
+        Expresion cero = new TerminalExpresion("0");
+        Expresion uno = new TerminalExpresion("1");
+        
+        Expresion containBoolean = new OrExpresion(cero, uno);
+        Expresion containOneAndCero = new AndExpresion(cero, uno);
+
+        System.out.println(containBoolean.interpreter("cero"));
+        System.out.println(containBoolean.interpreter("0"));
+        
+        System.out.println(containOneAndCero.interpreter("0"));
+        System.out.println(containOneAndCero.interpreter("0, 1"));
+        
     }
 
     private static void state() {
         MobileAlertStateContext context = new MobileAlertStateContext();
         context.alert();
         context.alert();
-/*        context.setState(new Vibracion());
+        context.setState(new Vibracion());
         context.alert();
         context.alert();
         context.setState(new Silent());
         context.alert();
-        context.alert();*/
+        context.alert();
     }
 
     private static void observer() {
