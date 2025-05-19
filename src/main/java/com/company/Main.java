@@ -19,6 +19,9 @@ import com.company.behavioral.observer.Coche;
 import com.company.behavioral.observer.MessagePublisher;
 import com.company.behavioral.observer.Peaton;
 import com.company.behavioral.observer.Semaforo;
+import com.company.behavioral.state.MobileAlertStateContext;
+import com.company.behavioral.state.Silent;
+import com.company.behavioral.state.Vibracion;
 import com.company.creational.abstractFactory.AbstractFactory;
 import com.company.creational.abstractFactory.Card;
 import com.company.creational.abstractFactory.FactoryProvider;
@@ -60,7 +63,20 @@ public class Main {
 //        iteratorTest();
 //        mediator();
 //        memento();
-        observer();
+//        observer();
+          state();
+    }
+
+    private static void state() {
+        MobileAlertStateContext context = new MobileAlertStateContext();
+        context.alert();
+        context.alert();
+/*        context.setState(new Vibracion());
+        context.alert();
+        context.alert();
+        context.setState(new Silent());
+        context.alert();
+        context.alert();*/
     }
 
     private static void observer() {
