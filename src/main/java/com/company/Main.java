@@ -49,6 +49,8 @@ import com.company.creational.factoryMethodEjm3.OperativeSystemFactory;
 import com.company.creational.factoryMethodEjm3.OperativeSystemType;
 import com.company.creational.prototype.PrototypeCard;
 import com.company.creational.prototype.PrototypeFactory;
+import com.company.structural.adapterEjm2.SimpleCoffee;
+import com.company.structural.adapterEjm2.WithMilk;
 
 import java.util.Objects;
 
@@ -81,7 +83,29 @@ public class Main {
 //        strategy();
 //        tempateMethod();
 //        visitor();
-        visitor2();
+//        visitor2();
+
+//        Structurales
+        adapter();
+        adapterEjm2();
+    }
+
+    private static void adapter() {
+        com.company.structural.adapter.CreditCard creditCard = new com.company.structural.adapter.CreditCard();
+        creditCard.pay("clasic");
+        creditCard.pay("gold");
+        creditCard.pay("black");
+        creditCard.pay("silver");
+    }
+
+    private static void adapterEjm2() {
+        SimpleCoffee simpleCoffee = new SimpleCoffee();
+        System.out.println(simpleCoffee.getDescription());
+        System.out.println(simpleCoffee.getCost());
+
+        WithMilk withMilk = new WithMilk(simpleCoffee);
+        System.out.println(withMilk.getDescription());
+        System.out.println(withMilk.getCost());
     }
 
     private static void visitor2() {
@@ -129,7 +153,7 @@ public class Main {
     private static void strategy() {
         Context context = new Context(new CapitalStrategyTestFormatter());
         context.publishText("este texto será convertido en mayuscula a traves del algoritmos");
-        
+
         context = new Context(new LowerStrategyTestFormatter());
         context.publishText("EsTE texto será convERTido en MINUSCULAS a traves del algoRITMOs");
     }
@@ -137,16 +161,16 @@ public class Main {
     private static void interpreter() {
         Expresion cero = new TerminalExpresion("0");
         Expresion uno = new TerminalExpresion("1");
-        
+
         Expresion containBoolean = new OrExpresion(cero, uno);
         Expresion containOneAndCero = new AndExpresion(cero, uno);
 
         System.out.println(containBoolean.interpreter("cero"));
         System.out.println(containBoolean.interpreter("0"));
-        
+
         System.out.println(containOneAndCero.interpreter("0"));
         System.out.println(containOneAndCero.interpreter("0, 1"));
-        
+
     }
 
     private static void state() {
@@ -165,26 +189,26 @@ public class Main {
         Coche coche = new Coche();
         Peaton peaton = new Peaton();
         MessagePublisher messagePublisher = new MessagePublisher();
-        
+
         messagePublisher.attach(coche);
         messagePublisher.attach(peaton);
         messagePublisher.notifyUpdate(new Semaforo("ROJO_COCHE"));
 
         try {
             Thread.sleep(2000);
-        }catch (InterruptedException e){
-            
+        } catch (InterruptedException e) {
+
         }
 
         System.out.println("------------------------------");
 
         messagePublisher.notifyUpdate(new Semaforo("VERDE_COCHE"));
-        
+
     }
 
     private static void memento() {
         Carateker carateker = new Carateker();
-        Article article = new Article("Autor","Memento es una pelicula");
+        Article article = new Article("Autor", "Memento es una pelicula");
         article.setText(article.getText() + " de Nolan");
         System.out.println(article.getText());
         carateker.addMemento(article.createMemento());
@@ -197,7 +221,7 @@ public class Main {
 
         mediator.setUser1(user1);
         mediator.setUser2(user2);
-        
+
         user1.send("Hola Soy User1");
         user2.send("Hola User1, soy User2");
     }
