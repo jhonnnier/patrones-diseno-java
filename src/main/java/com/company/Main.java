@@ -60,6 +60,7 @@ import com.company.structural.compostie.compostie1.CuentaComponent;
 import com.company.structural.compostie.compostie1.CuentaComposite;
 import com.company.structural.compostie.compostie1.CuentaCorriente;
 import com.company.structural.decorator.decorater1.*;
+import com.company.structural.facade.facade1.CreditMarketFacade;
 
 import java.util.Objects;
 
@@ -100,7 +101,15 @@ public class Main {
 //        bridge();
 //        bridge2();
 //        composite();
-        decorator();
+//        decorator();
+          facade();
+    }
+
+    private static void facade() {
+        CreditMarketFacade creditMarketFacade = new CreditMarketFacade();
+        creditMarketFacade.showCreditGold();
+        creditMarketFacade.showCreditSilver();
+        creditMarketFacade.showCreditBlack();
     }
 
     private static void decorator() {
