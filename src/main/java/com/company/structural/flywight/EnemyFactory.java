@@ -13,13 +13,18 @@ public class EnemyFactory {
         } else {
             switch (type) {
                 case "Private":
+                    System.out.println("----------------");
                     System.out.println("Un soldado ha sido creado");
                     enemy = new Private();
                     break;
                 case "Detective":
+                    System.out.println("----------------");
                     System.out.println("Un detective ha sido creado");
                     enemy = new Detective();
                     break;
+                default:
+                    System.out.println("----------------");
+                    System.out.println("No se ha creado enemigo");
             }
 
             enemies.put(type, enemy);

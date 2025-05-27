@@ -11,6 +11,7 @@ public class Detective implements Enemy {
     @Override
     public void setWeapon(String weapon) {
         this.weapon = weapon;
+        System.out.println("El arma del detective es: " + weapon);
     }
 
     @Override

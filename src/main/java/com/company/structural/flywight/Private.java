@@ -11,6 +11,7 @@ public class Private implements Enemy {
     @Override
     public void setWeapon(String weapon) {
         this.weapon = weapon;
+        System.out.println("El arma del soldado es: " + weapon);
     }
 
     @Override
