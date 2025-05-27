@@ -55,6 +55,10 @@ import com.company.structural.bridge.bridge.ClassicCreditCard;
 import com.company.structural.bridge.bridge.SecureCreditCard;
 import com.company.structural.bridge.bridge.UsecureCreditCard;
 import com.company.structural.bridge.bridge_II.*;
+import com.company.structural.compostie.compostie1.CuentaAhorro;
+import com.company.structural.compostie.compostie1.CuentaComponent;
+import com.company.structural.compostie.compostie1.CuentaComposite;
+import com.company.structural.compostie.compostie1.CuentaCorriente;
 
 import java.util.Objects;
 
@@ -93,7 +97,21 @@ public class Main {
 //        adapter();
 //        adapterEjm2();
 //        bridge();
-        bridge2();
+//        bridge2();
+        composite();
+    }
+
+    private static void composite() {
+        CuentaComponent cuentaCorriente = new CuentaCorriente(1000.0, "Alberto");
+        CuentaComponent cuentaAhorro = new CuentaAhorro(2000.0, "Alberto");
+
+        CuentaComposite cuentaComposite = new CuentaComposite();
+        cuentaComposite.addCuenta(cuentaCorriente);
+        cuentaComposite.addCuenta(cuentaAhorro);
+
+        cuentaComposite.showAccountName();
+        cuentaComposite.getAmount();
+
     }
 
     private static void bridge2() {
