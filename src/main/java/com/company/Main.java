@@ -51,6 +51,10 @@ import com.company.creational.prototype.PrototypeCard;
 import com.company.creational.prototype.PrototypeFactory;
 import com.company.structural.adapterEjm2.SimpleCoffee;
 import com.company.structural.adapterEjm2.WithMilk;
+import com.company.structural.bridge.bridge.ClassicCreditCard;
+import com.company.structural.bridge.bridge.SecureCreditCard;
+import com.company.structural.bridge.bridge.UsecureCreditCard;
+import com.company.structural.bridge.bridge_II.*;
 
 import java.util.Objects;
 
@@ -86,8 +90,37 @@ public class Main {
 //        visitor2();
 
 //        Structurales
-        adapter();
-        adapterEjm2();
+//        adapter();
+//        adapterEjm2();
+//        bridge();
+        bridge2();
+    }
+
+    private static void bridge2() {
+        testDevice(new Tv());
+        testDevice(new Radio());
+    }
+
+    public static void testDevice(Device device) {
+        System.out.println("Tests with basic remote.");
+        BasicRemote basicRemote = new BasicRemote(device);
+        basicRemote.power();
+        device.printStatus();
+
+        System.out.println("Tests with advanced remote.");
+        AdvancedRemote advancedRemote = new AdvancedRemote(device);
+        advancedRemote.power();
+        advancedRemote.mute();
+        device.printStatus();
+    }
+
+
+    private static void bridge() {
+        com.company.structural.bridge.bridge.CreditCard classic = new ClassicCreditCard(new UsecureCreditCard());
+        classic.realizarPago();
+
+        classic = new ClassicCreditCard(new SecureCreditCard());
+        classic.realizarPago();
     }
 
     private static void adapter() {
