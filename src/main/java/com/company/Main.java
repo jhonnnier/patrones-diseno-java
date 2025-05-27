@@ -63,6 +63,8 @@ import com.company.structural.decorator.decorater1.*;
 import com.company.structural.facade.facade1.CreditMarketFacade;
 import com.company.structural.flywight.Enemy;
 import com.company.structural.flywight.EnemyFactory;
+import com.company.structural.proxy.Internet;
+import com.company.structural.proxy.Proxy;
 
 import java.util.Objects;
 import java.util.Random;
@@ -105,8 +107,21 @@ public class Main {
 //        bridge2();
 //        composite();
 //        decorator();
-//          facade();
-        flyweight();
+//        facade();
+//        flyweight();
+        proxy();
+    }
+
+    private static void proxy() {
+        Internet internet = new Proxy();
+        try {
+            internet.connectTo("https://www.google.com");
+            internet.connectTo("https://www.facebook.com");
+
+        } catch (Exception e) {
+            System.out.println("Error connecting to: " + e.getMessage());
+        }
+
     }
 
     private static void flyweight() {
