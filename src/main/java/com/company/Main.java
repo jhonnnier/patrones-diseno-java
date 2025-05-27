@@ -61,8 +61,11 @@ import com.company.structural.compostie.compostie1.CuentaComposite;
 import com.company.structural.compostie.compostie1.CuentaCorriente;
 import com.company.structural.decorator.decorater1.*;
 import com.company.structural.facade.facade1.CreditMarketFacade;
+import com.company.structural.flywight.Enemy;
+import com.company.structural.flywight.EnemyFactory;
 
 import java.util.Objects;
+import java.util.Random;
 
 import static com.company.creational.prototype.PrototypeFactory.CartType.AMEX;
 import static com.company.creational.prototype.PrototypeFactory.CartType.VISA;
@@ -102,8 +105,32 @@ public class Main {
 //        bridge2();
 //        composite();
 //        decorator();
-          facade();
+//          facade();
+        flyweight();
     }
+
+    private static void flyweight() {
+        for (int i = 0; i < 15; i++) {
+            Enemy enemy = EnemyFactory.getEnemy(getRandomEnemyType());
+            enemy.setWeapon(getRandomWeapon());
+            enemy.lifePoints();
+        }
+    }
+
+    private static String getRandomWeapon() {
+        Random r = new Random();
+        int randInt = r.nextInt(weapon.length);
+        return weapon[randInt];
+    }
+
+    private static String getRandomEnemyType() {
+        Random r = new Random();
+        int randInt = r.nextInt(enemyType.length);
+        return enemyType[randInt];
+    }
+
+    private static String[] enemyType = {"Private", "Detective"};
+    private static String[] weapon = {"Fusil", "Revolver", "Pistola", "Metralleta", "Lanza Granadas", "9mm"};
 
     private static void facade() {
         CreditMarketFacade creditMarketFacade = new CreditMarketFacade();
