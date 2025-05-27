@@ -59,6 +59,7 @@ import com.company.structural.compostie.compostie1.CuentaAhorro;
 import com.company.structural.compostie.compostie1.CuentaComponent;
 import com.company.structural.compostie.compostie1.CuentaComposite;
 import com.company.structural.compostie.compostie1.CuentaCorriente;
+import com.company.structural.decorator.decorater1.*;
 
 import java.util.Objects;
 
@@ -98,7 +99,26 @@ public class Main {
 //        adapterEjm2();
 //        bridge();
 //        bridge2();
-        composite();
+//        composite();
+        decorator();
+    }
+
+    private static void decorator() {
+        System.out.println("-------- Tarjeta Gold con configuración --------");
+        Credit gold = new Gold();
+        gold.showCredit();
+
+        System.out.println("-------- Tarjeta Black con configuración --------");
+        Credit blackInternationalPayment = new Black();
+        blackInternationalPayment = new InternationalPaymentDecorator(blackInternationalPayment);
+        blackInternationalPayment.showCredit();
+
+        System.out.println("-------- Tarjeta Gold2 con configuración --------");
+        Credit goldSecureInternational = new Gold();
+        goldSecureInternational = new InternationalPaymentDecorator(goldSecureInternational);
+        goldSecureInternational = new SecureDecorator(goldSecureInternational);
+        goldSecureInternational = new PSEDecorator(goldSecureInternational);
+        goldSecureInternational.showCredit();
     }
 
     private static void composite() {
